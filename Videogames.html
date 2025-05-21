@@ -1,0 +1,68 @@
+<!DOCTYPE html> <!-- Defines the document type as HTML5 -->
+<html lang="en"> <!-- Sets the language of the document to English -->
+<head>
+  <meta charset="UTF-8" /> <!-- Sets the character encoding to UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Ensures proper scaling on mobile devices -->
+  <link rel="stylesheet" href="Design.css" /> <!-- Links to the external CSS file for styling -->
+  <title>Home</title> <!-- Sets the title of the webpage -->
+  <style>
+    .video-container { display: none; } /* Initially hide all video containers */
+    .video-container.active { display: block; } /* Show only the active video container */
+  </style>
+</head>
+<body>
+  <header> <!-- Header section containing the logo and toggle button -->
+    <a href="index.html" class="logo">logo</a> <!-- Logo link that navigates back to the homepage -->
+    <div class="toggle"></div> <!-- Placeholder for a toggle button, possibly for a menu -->
+  </header>
+
+  <!-- Video Slider Section -->
+  <div class="video-slider"> <!-- Container for the video slider -->
+    <div class="video-container active"> <!-- Container for the first video, initially active -->
+      <iframe id="video1" class="video" width="600" height="600" src="https://www.youtube.com/embed/oDCyjdfRAuE?si=icsvC6968GSwVity" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-container"> <!-- Container for the second video, initially hidden -->
+      <iframe id="video2" class="video" width="560" height="315" src="https://www.youtube.com/embed/ldTmLHKiSdo?si=pGQGbgkzl1mSRbTo&amp;start=2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-container"> <!-- Container for the third video, initially hidden -->
+      <iframe id="video3" class="video" width="560" height="315" src="https://www.youtube.com/embed/RoipkwMKCBs?si=-arMjHYiQs9V_-u0&amp;start=3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <div class="video-container"> <!-- Container for the fourth video, initially hidden -->
+      <iframe id="video4" class="video" width="560" height="315" src="https://www.youtube.com/embed/18zT9zzw5Gw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <button class="slide-button left" onclick="prevVideo()">&#10094;</button> <!-- Button to navigate to the previous video -->
+    <button class="slide-button right" onclick="nextVideo()">&#10095;</button> <!-- Button to navigate to the next video -->
+  </div>
+
+  <ul class="menu"> <!-- Navigation menu -->
+      <li><a href="index.html">Home</a></li> <!-- Home link, currently linking to the same page -->
+      <li><a href="Videogames.html">Projects</a></li> <!-- Link to the projects page -->
+      <li><a href="artworks.html">Artworks</a></li> <!-- Link to the artworks page -->
+    </ul>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> <!-- Ionicons module for modern browsers -->
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> <!-- Ionicons script for older browsers -->
+  <script type="text/javascript">
+    let currentVideoIndex = 0;
+    const videos = document.querySelectorAll('.video-container');
+
+    function showVideo(index) {
+      videos.forEach((video, i) => {
+        video.classList.toggle('active', i === index);
+      });
+    }
+
+    function prevVideo() {
+      currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+      showVideo(currentVideoIndex);
+    }
+
+    function nextVideo() {
+      currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+      showVideo(currentVideoIndex);
+    }
+
+    showVideo(currentVideoIndex); // Initialize the first video as active
+  </script>
+</body>
+</html>

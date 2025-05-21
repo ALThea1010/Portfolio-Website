@@ -1,0 +1,616 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0'); /* Importing Poppins font from Google Fonts */
+
+* {
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  font-family: 'Poppins', sans-serif; /* Set default font family */
+}
+
+body {
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.banner {
+  position: relative; /* Position relative to its normal position */
+  width: 100%; /* Full width */
+  padding: 0 100px; /* Horizontal padding */
+  min-height: 100vh; /* Minimum height of full viewport */
+  display: flex; /* Flexbox layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  background: #000000; /* Black background */
+}
+
+.banner::before {
+  position: absolute; /* Positioned relative to the nearest positioned ancestor */
+  content: ""; /* Empty content for styling */
+  top: -90%; /* Position above the banner */
+  left: -30%; /* Position to the left */
+  height: 1500px; /* Large height for effect */
+  width: 1500px; /* Large width for effect */
+  border-radius: 50%; /* Circular shape */
+  background: linear-gradient( /* Gradient background */
+    to bottom,
+    rgba(161, 0, 242, 0.8) 0%,
+    rgba(161, 0, 242, 0.3) 15%,
+    transparent 50%,
+    rgba(161, 0, 242, 0.3) 85%,
+    rgba(161, 0, 242, 0.8) 100%
+  );
+  filter: blur(30px); /* Blur effect */
+  z-index: 1; /* Layering order */
+  transition: 1; /* Transition effect */
+}
+
+.banner.active::before {
+  width: 50%; /* Reduced width when active */
+  height: 50%; /* Reduced height when active */
+  background: rgba(0, 0, 0, 0.5); /* Darker background when active */
+}
+
+.banner::after {
+  position: absolute; /* Positioned relative to the nearest positioned ancestor */
+  content: ""; /* Empty content for styling */
+  bottom: 0; /* Position at the bottom */
+  right: 0; /* Position to the right */
+  height: 25px; /* Small height */
+  width: 50%; /* Half width */
+  background: rgba(0, 237, 245, 0.6); /* Light blue background */
+  filter: blur(30px); /* Blur effect */
+  z-index: 1; /* Layering order */
+  transition: 1s; /* Transition effect */
+}
+
+.banner.active::after {
+  width: 100%; /* Full width when active */
+  height: 100%; /* Full height when active */
+  background: rgba(0, 0, 0, 0.5); /* Darker background when active */
+}
+
+header {
+  position: fixed; /* Fixed position at the top */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Full width */
+  z-index: 100; /* High layering order */
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Space between items */
+  align-items: center; /* Center items vertically */
+  padding: 30px 100px; /* Padding around header */
+}
+
+header .logo {
+  font-size: 2em; /* Large font size */
+  font-weight: 700; /* Bold font weight */
+  color: #ffffff; /* White color */
+  text-decoration: none; /* No underline */
+  text-transform: uppercase; /* Uppercase text */
+  transition: 0.5s; /* Transition effect */
+  transform-origin: right; /* Transform origin on the right */
+}
+
+.banner.active .logo {
+  transform: scale(0); /* Scale down when active */
+  transform-origin: left; /* Transform origin on the left */
+}
+
+header .toggle {
+  position: relative; /* Positioned relative to its normal position */
+  background: url('menu.png'); /* Background image for menu */
+  width: 30px; /* Width of toggle */
+  height: 30px; /* Height of toggle */
+  background-repeat: no-repeat; /* No repeat of background image */
+  background-position: center; /* Center the background image */
+  background-size: 30px; /* Size of the background image */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+header .toggle.active {
+  position: relative; /* Positioned relative to its normal position */
+  background: url('close.png'); /* Background image for close */
+  width: 30px; /* Width of toggle */
+  height: 30px; /* Height of toggle */
+  background-repeat: no-repeat; /* No repeat of background image */
+  background-position: center; /* Center the background image */
+  background-size: 25px; /* Size of the background image */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.content {
+  position: relative; /* Positioned relative to its normal position */
+  width: 100%; /* Full width */
+  z-index: 2; /* Layering order */
+  display: flex; /* Flexbox layout */
+  justify-content: space-around; /* Space around items */
+  align-items: center; /* Center items vertically */
+  transition: 0.5s; /* Transition effect */
+}
+
+.banner.active .content .imgBox img {
+  opacity: 0.2; /* Reduced opacity when active */
+}
+
+.content .contentBox {
+  width: 700px; /* Width of content box */
+  transform-origin: right; /* Transform origin on the right */
+  transition: 0.5s; /* Transition effect */
+}
+
+.content .contentBox h2 {
+  font-size: 2em; /* Large font size */
+  font-weight: 300; /* Light font weight */
+  color: #ffffff; /* White color */
+  line-height: 1.5em; /* Line height for better alignment */
+  text-transform: uppercase; /* Uppercase text */
+  height: auto; /* Automatic height */
+  margin-top: 0.5em; /* Margin above the heading */
+}
+
+.content .contentBox .title {
+  position: relative; /* Positioned relative to its normal position */
+  font-size: 7em; /* Very large font size */
+  letter-spacing: 1px; /* Spacing between letters */
+  color: #ffffff; /* White color */
+  line-height: 1; /* Line height for better alignment */
+  text-transform: uppercase; /* Uppercase text */
+  height: auto; /* Automatic height */
+}
+
+.content .contentBox .title::before {
+  position: absolute; /* Positioned relative to the nearest positioned ancestor */
+  content: attr(data-text); /* Content from data attribute */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  color: rgba(0, 237, 245, 1); /* Light blue color */
+  border-right: 2px solid rgba(0, 237, 245, 1); /* Right border */
+  overflow: hidden; /* Hide overflow */
+  white-space: nowrap; /* Prevent text wrapping */
+  animation: animate 6s linear infinite; /* Animation effect */
+}
+
+@keyframes animate {
+  0%, 10%, 100% {
+    width: 30%; /* Width at start, 10%, and end */
+  }
+  70%, 90% {
+    width: 64.5%; /* Width at 70% and 90% */
+  }
+}
+
+.content .contentBox p {
+  font-size: 1em; /* Normal font size */
+  font-weight: 200; /* Light font weight */
+  letter-spacing: 1px; /* Spacing between letters */
+  color: #ffffff; /* White color */
+  padding: 20px 0; /* Vertical padding */
+  margin-top: 10px; /* Margin above the paragraph */
+}
+
+.content .contentBox a {
+  position: relative; /* Positioned relative to its normal position */
+  display: inline-block; /* Inline block display */
+  border: 1px solid rgba(0, 237, 245, 0.25); /* Border with light blue color */
+  text-decoration: none; /* No underline */
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 1px; /* Spacing between letters */
+  color: #dadada; /* Light gray color */
+  padding: 15px 40px; /* Padding around the link */
+  transition: 0.5s; /* Transition effect */
+  overflow: hidden; /* Hide overflow */
+  background: rgba(255, 255, 255, 0.1); /* Light background */
+}
+
+.contentBox a::before {
+  position: absolute; /* Positioned relative to the nearest positioned ancestor */
+  content: ""; /* Empty content for styling */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  height: 100%; /* Full height */
+  width: 50%; /* Half width */
+  background: linear-gradient(to left, rgba(0, 237, 245, 0.25), transparent); /* Gradient background */
+  transform: skew(45deg) translateX(0); /* Skew and translate effect */
+  transition: 0.5s; /* Transition effect */
+}
+
+.contentBox a:hover {
+  letter-spacing: 4px; /* Increased letter spacing on hover */
+  color: #ffffff; /* White color on hover */
+}
+
+.contentBox a:hover::before {
+  transform: skew(45deg) translateX(200%); /* Skew and translate effect on hover */
+}
+
+.banner.active .contentBox {
+  transform: scale(0); /* Scale down when active */
+  transform-origin: left; /* Transform origin on the left */
+}
+
+.content .imgBox img {
+  transform: scale(1.3); /* Scale up the image */
+  opacity: 0.6; /* Reduced opacity */
+  max-width: 100%; /* Maximum width */
+  min-width: 400px; /* Minimum width */
+  filter: blur(1px); /* Blur effect */
+  border-radius: 50%; /* Circular shape */
+}
+
+.sci {
+  position: absolute; /* Positioned relative to the nearest positioned ancestor */
+  left: 100px; /* Align to the left */
+  bottom: 30px; /* Align to the bottom */
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Space between items */
+  align-items: center; /* Center items vertically */
+  transition: 0.5s; /* Transition effect */
+  transform-origin: right; /* Transform origin on the right */
+  z-index: 2; /* Layering order */
+  gap: 20px; /* Gap between items */
+}
+
+.sci li {
+  list-style: none; /* No list style */
+}
+
+.banner.active .sci {
+  transform: scale(0); /* Scale down when active */
+  transform-origin: left; /* Transform origin on the left */
+}
+
+.sci li a {
+  display: inline-block; /* Inline block display */
+  /* Add styling for the link if needed */
+}
+
+.sci li a ion-icon {
+  font-size: 2em; /* Large font size */
+  color: #ffffff; /* White color */
+  transition: 0.5s; /* Transition effect */
+}
+
+.sci li a ion-icon:hover {
+  color: rgba(0, 237, 245, 0.6); /* Light blue color on hover */
+}
+
+.menu {
+  position: fixed; /* Fixed position */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  display: flex; /* Flexbox layout */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  flex-direction: column; /* Column layout */
+  z-index: 2; /* Layering order */
+  transition: 0.5; /* Transition effect */
+  transition-delay: 0s; /* No delay */
+  transform: scale(0); /* Scale down initially */
+  visibility: hidden; /* Hidden initially */
+  opacity: 0; /* Transparent initially */
+}
+
+.banner.active .menu {
+  transform: scale(1); /* Scale up when active */
+  visibility: visible; /* Visible when active */
+  opacity: 1; /* Opaque when active */
+  transition-delay: 0.8s; /* Delay for transition */
+}
+
+.menu li {
+  list-style: none; /* No list style */
+  margin-bottom: 10px; /* Margin below each item */
+}
+
+.menu li a {
+  text-decoration: none; /* No underline */
+  color: #ffffff; /* White color */
+  font-size: 2em; /* Large font size */
+  font-weight: 300; /* Light font weight */
+  transition: 0.5s; /* Transition effect */
+}
+
+.menu li a:hover {
+  color: rgba(0, 237, 245, 1); /* Light blue color on hover */
+}
+
+@media (max-width: 991px) { /* Media query for smaller screens */
+  header {
+    padding: 20px 40px; /* Reduced padding */
+  }
+  .banner {
+    padding: 0 40px; /* Reduced padding */
+    overflow: hidden; /* Hide overflow */
+  }
+
+  .banner::before {
+    top: -20%; /* Adjusted position */
+    left: -20%; /* Adjusted position */
+    height: 300px; /* Reduced height */
+    width: 300px; /* Reduced width */
+  }
+  .banner::after {
+    bottom: 0; /* Align to the bottom */
+    height: 15px; /* Reduced height */
+    width: 100%; /* Full width */
+  }
+  .content {
+    flex-direction: column-reverse; /* Reverse column layout */
+    margin: 10px 0; /* Margin around content */
+  }
+  .content .contentBox {
+    margin-top: 5px; /* Margin above content box */
+    max-width: 100%; /* Full width */
+  }
+  .content .imgBox img {
+    max-width: 90%; /* Maximum width */
+    min-height: 300px; /* Minimum height */
+    transform: scale(0.9); /* Scale down */
+  }
+  .content .contentBox h2 {
+    font-size: 1em; /* Smaller font size */
+  }
+  .content .contentBox .title {
+    font-size: 2.5em; /* Smaller font size */
+  }
+  .content .contentBox p {
+    font-size: 0.6em; /* Smaller font size */
+  }
+  .content .contentBox a {
+    padding: 10px 30px; /* Reduced padding */
+  }
+  .sci {
+    left: 50%; /* Centered horizontally */
+    transform: translateX(-50%); /* Centered horizontally */
+  }
+}
+
+.imgBox {
+  width: 500px; /* Adjust the width as needed */
+  height: 500px; /* Adjust the height as needed */
+  overflow: hidden;
+  position: relative;
+  background-color: rgba(255, 255, 255,); /* Adjust the background color and opacity */
+  border-radius: 10px; /* Optional: Add border radius for rounded corners */
+}
+
+.imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire box */
+  opacity: 0.8; /* Adjust the opacity to blend with the background */
+  filter: brightness(0.8); /* Adjust the brightness to make the image darker */
+}
+
+@keyframes blindingFlash {
+  0%, 100% {
+    opacity: 1;
+    background-color: rgb(98, 98, 255); /* Start and end with blue */
+  }
+  25% {
+    background-color: rgb(204, 153, 255); /* Light purple */
+  }
+  50% {
+    opacity: 0;
+    background-color: rgb(153, 255, 153); /* Light green at the peak of the flash */
+  }
+  75% {
+    background-color: rgb(255, 204, 255); /* Light pink */
+  }
+}
+
+.imgBox::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 650px; /* Adjust the size of the circle */
+  height: 650px; /* Adjust the size of the circle */
+  background-color: rgb(98, 98, 255); /* Initial color */
+  border-radius: 100%; /* Make it a circle */
+  transform: translate(-50%, -50%); /* Center the circle */
+  z-index: -1; /* Ensure the circle is behind the imgBox */
+  animation: blindingFlash 0.5s infinite; /* Apply the blinding flash animation */
+}
+
+
+body {
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-color: black; /* Black background */
+  margin: 0rem; /* No margin */
+  overflow: hidden; /* Hide overflow */
+}
+
+#image-track {
+  display: flex; /* Flexbox layout */
+  gap: 4vmin; /* Gap between items */
+  position: absolute; /* Positioned relative to the nearest positioned ancestor */
+  left: 50%; /* Centered horizontally */
+  top: 50%; /* Centered vertically */
+  transform: translate(0%, -50%); /* Centered vertically */
+  user-select: none; /* Prevent image highlighting */
+}
+
+#image-track > .image {
+  width: 40vmin; /* Width of image */
+  height: 56vmin; /* Height of image */
+  object-fit: cover; /* Cover the box */
+  object-position: 100% center; /* Position of the image */
+}
+
+body.menu-toggled > .meta-link > span {
+  color: rgb(30, 30, 30); /* Dark color */
+}
+
+#source-link {
+  bottom: 60px; /* Position from the bottom */
+}
+
+#source-link > i {
+  color: rgb(94, 106, 210); /* Blue color */
+}
+
+#yt-link > i {
+  color: rgb(239, 83, 80); /* Red color */
+}
+
+.meta-link {
+  align-items: center; /* Center items vertically */
+  backdrop-filter: blur(3px); /* Blur effect */
+  background-color: rgba(255, 255, 255, 0.05); /* Light background */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+  border-radius: 6px; /* Rounded corners */
+  bottom: 10px; /* Position from the bottom */
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  cursor: pointer; /* Pointer cursor on hover */
+  display: inline-flex; /* Inline flexbox layout */
+  gap: 5px; /* Gap between items */
+  left: 10px; /* Position from the left */
+  padding: 10px 20px; /* Padding around the link */
+  position: fixed; /* Fixed position */
+  text-decoration: none; /* No underline */
+  transition: background-color 400ms, border-color 400ms; /* Transition effects */
+  z-index: 10000; /* High layering order */
+}
+
+.meta-link:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Light background on hover */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border on hover */
+}
+
+.meta-link > i, .meta-link > span {
+  height: 20px; /* Height of icon and text */
+  line-height: 20px; /* Line height */
+}
+
+.meta-link > span {
+  color: white; /* White color */
+  font-family: "Rubik", sans-serif; /* Font family */
+  font-weight: 500; /* Medium font weight */
+}
+
+body {
+  margin: 0; /* No margin */
+  padding: 0; /* No padding */
+  background-color: black; /* Black background */
+  overflow: hidden; /* Hide overflow */
+}
+
+.video-slider {
+  position: relative; /* Positioned relative to its normal position */
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  display: flex; /* Flexbox layout */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+}
+
+.video-container {
+  position: relative; /* Positioned relative to its normal position */
+  width: 80%; /* Width of video container */
+  max-width: 800px; /* Maximum width for the video */
+  height: auto; /* Automatic height */
+  overflow: hidden; /* Hide overflow */
+}
+
+.video {
+  width: 100%; /* Full width */
+  height: auto; /* Automatic height */
+  object-fit: cover; /* Cover the container */
+}
+
+.slide-button {
+  position: absolute; /* Positioned relative to the nearest positioned ancestor */
+  top: 50%; /* Centered vertically */
+  transform: translateY(-50%); /* Centered vertically */
+  background-color: rgba(255, 255, 255, 0.7); /* Light background */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 10px; /* Padding around the button */
+  transition: background-color 0.3s; /* Transition effect */
+  font-size: 24px; /* Large font size */
+  color: black; /* Black color */
+}
+
+.slide-button:hover {
+  background-color: rgba(255, 255, 255, 1); /* White background on hover */
+}
+
+.slide-button.left {
+  left: 10px; /* Position from the left */
+}
+
+.slide-button.right {
+  right: 10px; /* Position from the right */
+}
+
+
+
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px;
+}
+
+.toggle {
+    background: url('menu.png');
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+    transform: scale(0);
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 0.5s, visibility 0.5s, opacity 0.5s;
+}
+
+.menu.active {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    margin: 10px 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 2em;
+    transition: color 0.5s;
+}
+
+.menu li a:hover {
+    color: rgba(0, 237, 245, 1);
+}
